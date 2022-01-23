@@ -1,14 +1,21 @@
 import react from "react";
-import Headder from "./Headder"
-import NavBar from "./NavBar";
-import TextDisplayed from "./TextDisplayed";
+import HomePage from "./HomePage";
+import Data from "./Data";
+import LogIn from "./LogIn";
+import SignUp from "./SignUp";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 
 function App() {
   return (
     <div className="App">
-      <Headder/>
-      <NavBar/>
-      <TextDisplayed/>
+      <Router>
+        <Routes>
+          <Route path = "/" element = { <HomePage/> }/>
+          <Route path = "/Data" element = { <Data/> }/>
+          <Route path = "/LogIn" element = { <LogIn/> }/>
+          <Route path = "/SignUp" element = { <SignUp/> }/>
+        </Routes>
+      </Router>
     </div>
   );
 }

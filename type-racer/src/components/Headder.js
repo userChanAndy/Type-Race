@@ -5,6 +5,7 @@ function Headder() {
         <div>
             <h1>Keyboard Racer</h1>
             <button>Login</button>
+            <button>Sign up</button>
         </div>
     )
 }
