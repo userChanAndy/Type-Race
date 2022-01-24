@@ -2,10 +2,9 @@ import React from 'react'
 
 function Headder() {
     return (
-        <div>
-            <h1>Keyboard Racer</h1>
-            <button>Login</button>
-            <button>Sign up</button>
+        <div id='headder'>
+            <h1 className='hello'>Keyboard Racer</h1>
+            <button className='login'>Login</button>
         </div>
     )
 }
