@@ -1,21 +1,21 @@
 import React from 'react'
 
-function Timer({timeRemaining,setTimeRemaining, time, setTime}) {
-    function timerToggle (e) {
+function Timer({timeRemaining,setTimeRemaining, time, setTime, gameStatus}) {
+    function switchTime (e) {
         e.preventDefault()
-        if (time === 15) {
+        if (time === 15 && gameStatus !== "gameStarted") {
             setTimeRemaining(30)
             setTime(30)
-        } else if (time === 30) {
+        } else if (time === 30 && gameStatus !== "gameStarted") {
             setTimeRemaining(15)
             setTime(15)
         }
     }
 
     return (
-    <div>
-        <button onClick={timerToggle}>{time} second</button>
+    <div id = "timer">
         <h1>{timeRemaining}</h1>
+        <button id = "selectTime" onClick={switchTime}>{time} second test</button>
     </div>
     )}
 

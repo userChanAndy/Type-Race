@@ -47,7 +47,7 @@ function TextDisplayed() {
             setGameStatus("gameStarted")
             const countDown = setInterval(()=> {
                 setTimeRemaining((timeRemaining)=> {
-                    if(timeRemaining < 0) {
+                    if(timeRemaining <= 0) {
                         clearInterval(countDown)
                         setGameStatus("gameOver")
                         setCurrentInput("")
@@ -89,10 +89,10 @@ function TextDisplayed() {
         if(gameStatus === "gameOver") return <Score
         time = {time}
         correct = {correct}
-        incorrect = {incorrect}/>
+        incorrect = {incorrect}
+        />
         else if(gameStatus === "gameStarted") return <TextInput
         words = {words}
-        checkMatch = {checkMatch}
         GameStatus = {gameStatus}
         charIndex = {charIndex}
         currentIndex = {currentIndex}
@@ -104,6 +104,7 @@ function TextDisplayed() {
     return (
         <div>
             <Timer 
+            gameStatus = {gameStatus}
             time = {time}
             setTime = {setTime}
             timeRemaining = {timeRemaining}

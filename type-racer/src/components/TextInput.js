@@ -16,18 +16,18 @@ function TextInput({words, GameStatus, charIndex, currentIndex, currentChar, che
     }
 
     return (
-        <span>
+        <div id = "textDisplayed" className="has-background-grey-light">
         {(GameStatus === "gameStarted") ? words.map((word, i) => (
             <span>
-                <span id='set-word-colors'>
+                <span>
                     {word.split("").map((char, index) => (
-                        <span className={matchChar(i, index, char)} key = {index}>{char}</span>
+                        <span id = "words" className={matchChar(i, index, char)} key = {index}>{char}</span>
                     ))}
                 </span>
                 <span> </span>
             </span>
         )) : null}
-        </span>
+        </div>
     )
 }
 
