@@ -10,7 +10,7 @@ function TextCopy({startTimer, handleKeyPress, currentInput, setCurrentInput, Ga
     return (
         <div id = "input">  
             <button className='start-btn' onClick={startTimer}>{startButton()}</button> 
-            <input id = "inputField" ref = {textInput} disabled = {GameStatus !== "gameStarted"} onKeyDown={handleKeyPress} value = {currentInput} onChange={e => setCurrentInput(e.target.value)} className='typed' placeholder="Click Start to Race" type="text"></input>
+            <input autoComplete='off' id = "inputField" ref = {textInput} disabled = {GameStatus !== "gameStarted"} onKeyDown={handleKeyPress} value = {currentInput} onChange={e => setCurrentInput(e.target.value)} className='typed' placeholder="Click Race to Start" type="text"></input>
         </div>
     )
 }

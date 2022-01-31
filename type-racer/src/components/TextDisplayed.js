@@ -4,13 +4,12 @@ import TextInput from './TextInput'
 import Timer from './Timer'
 import randomWords from 'random-words'
 import Score from './Score'
-const numberOfWords = 100
+const numberOfWords = 83
 
 
-function TextDisplayed() {
+function TextDisplayed({setWpm, setPercentage, time, setTime}) {
     const [words, setWords] = useState([])
-    const [timeRemaining, setTimeRemaining] = useState(15);
-    const [time, setTime] = useState(15)
+    const [timeRemaining, setTimeRemaining] = useState(1500);
     const [currentInput, setCurrentInput] = useState("")
     const [currentIndex, setCurrentIndex] = useState(0)
     const [charIndex, setCharIndex] = useState(-1)
@@ -45,6 +44,8 @@ function TextDisplayed() {
         }
         if(gameStatus !== "gameStarted") {
             setGameStatus("gameStarted")
+            setWpm(0)
+            setPercentage(0)
             const countDown = setInterval(()=> {
                 setTimeRemaining((timeRemaining)=> {
                     if(timeRemaining <= 0) {
@@ -69,6 +70,7 @@ function TextDisplayed() {
         } else if (e.keyCode === 8){
             setCharIndex(charIndex - 1)
             setCurrentChar("")
+            setCharIndex(charIndex -1)
         } else {
             setCharIndex(charIndex + 1)
             setCurrentChar(e.key)
@@ -80,18 +82,24 @@ function TextDisplayed() {
         const match = compare === currentInput.trim()
         if(match) {
             setCorrect(correct + 1)
+            return true
         } else { 
             setIncorect(incorrect + 1)
+            return false
         }
     }
 
     function display () {
         if(gameStatus === "gameOver") return <Score
+        setWpm = {setWpm}
+        setPercentage = {setPercentage}
         time = {time}
         correct = {correct}
         incorrect = {incorrect}
         />
         else if(gameStatus === "gameStarted") return <TextInput
+        currentInput={currentInput}
+        checkMatch={checkMatch}
         words = {words}
         GameStatus = {gameStatus}
         charIndex = {charIndex}

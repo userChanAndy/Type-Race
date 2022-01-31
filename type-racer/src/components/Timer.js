@@ -14,9 +14,10 @@ function Timer({timeRemaining,setTimeRemaining, time, setTime, gameStatus}) {
 
     return (
     <div id = "timer">
-        <h1>{timeRemaining}</h1>
-        <button id = "selectTime" onClick={switchTime}>{time} second test</button>
-    </div>
-    )}
+        <h1 id = "countdown">{timeRemaining}</h1>
+        <button id = "selectTime" onClick={switchTime}>{time} Second Race</button>
+    </div> 
+    )
+}
 
 export default Timer
