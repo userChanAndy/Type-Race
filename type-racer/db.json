@@ -1,27 +1,67 @@
 {
-    "Scores": [{
-        "id": 1,
-        "userName": "user",
-        "gameTime": "30",
-        "wpmScore": "50",
-        "percentage": "20%"
-    }, {
-        "id": 2,
-        "userName": "user",
-        "gameTime": "15",
-        "wpmScore": "25",
-        "percentage": "90%"
-    }, {
-        "id": 3,
-        "userName": "user",
-        "gameTime": "15",
-        "wpmScore": "99",
-        "percentage": "98%"
-    }, {
-        "id": 4,
-        "userName": "user",
-        "gameTime": "30",
-        "wpmScore": "130",
-        "percentage": "100%"
-    }]
+  "Scores": [
+    {
+      "id": 1,
+      "userName": "user",
+      "gameTime": "30",
+      "wpmScore": "50",
+      "accuracy": "20%"
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 2
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 3
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 4
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 5
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 6
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 7
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 8
+    },
+    {
+      "userName": "user",
+      "gameTime": 15,
+      "wpmScore": 0,
+      "accuracy": 0,
+      "id": 9
+    }
+  ]
 }

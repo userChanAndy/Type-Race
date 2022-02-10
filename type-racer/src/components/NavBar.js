@@ -1,41 +1,97 @@
-import React, {useState} from 'react'
+import React, { useState, useEffect } from "react";
 import Data from "./Data";
-import HomePage from "./HomePage"
+import HomePage from "./HomePage";
 import Settings from "./Settings";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-import TextDisplayed from './TextDisplayed';
+import TextDisplayed from "./TextDisplayed";
 
 function NavBar() {
-    const [wpm, setWpm] = useState(0)
-    const [time, setTime] = useState(15)
-    const [percentage, setPercentage] = useState(0)
-    console.log(wpm)
-    console.log(percentage)
+  const [time, setTime] = useState(15);
+  const [correct, setCorrect] = useState(0);
+  const [incorrect, setIncorect] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentInput, setCurrentInput] = useState("");
+  const [charIndex, setCharIndex] = useState(-1);
+  const [currentChar, setCurrentChar] = useState("");
 
-    return (
-        <Router>
-            <div id= "navBarContainer">
-                <nav id = "navBar">
-                    <button className = "navBtn"><Link to = "/">Home</Link></button>
-                    <button className = "navBtn"><Link to = "/Race">Race</Link></button>
-                    <button className = "navBtn"><Link to = "/Data">Data</Link></button>
-                    <button className = "navBtn"><Link to = "/Settings">Settings</Link></button>
-                </nav>
-                <Routes>                   
-                    <Route path ="/" element={<HomePage/>}/>
-                    <Route path ="/Race" element={<TextDisplayed
-                    time = {time}
-                    setTime = {setTime}
-                    setWpm = {setWpm}
-                    setPercentage = {setPercentage}/>}/>
-                    <Route path ="/Data" element={<Data
-                    wpm = {wpm}
-                    percentage = {percentage}/>}/>
-                    <Route path ="/Settings" element={<Settings/>}/>
-                </Routes>
-            </div>
-        </Router>
-    )
+  const scoreData = "http://localhost:3000/scores";
+  const [dataArr, setDataArr] = useState([]);
+
+  useEffect(() => {
+    fetch(scoreData)
+      .then((res) => res.json())
+      .then((scores) => {
+        setDataArr(scores);
+      });
+  }, []);
+
+  function onAddData(newData) {
+    const updatedData = [...dataArr, newData];
+    setDataArr(updatedData);
+  }
+
+  function calculateScore() {
+    if (time === 15) return correct * 4;
+    else if (time === 30) return correct * 2;
+  }
+  console.log(calculateScore());
+
+  function calculatePercentage() {
+    return correct !== 0
+      ? Math.round((correct / (correct + incorrect)) * 100)
+      : 0;
+  }
+
+  return (
+    <Router>
+      <div id="navBarContainer">
+        <nav id="navBar">
+          <button className="navBtn">
+            <Link to="/">Home</Link>
+          </button>
+          <button className="navBtn">
+            <Link to="/Race">Race</Link>
+          </button>
+          <button className="navBtn">
+            <Link to="/Data">Data</Link>
+          </button>
+          <button className="navBtn">
+            <Link to="/Settings">Settings</Link>
+          </button>
+        </nav>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route
+            path="/Race"
+            element={
+              <TextDisplayed
+                onAddData={onAddData}
+                scoreData={scoreData}
+                calculatePercentage={calculatePercentage}
+                calculateScore={calculateScore}
+                correct={correct}
+                incorrect={incorrect}
+                setCorrect={setCorrect}
+                setIncorect={setIncorect}
+                time={time}
+                setTime={setTime}
+                currentInput={currentInput}
+                setCurrentInput={setCurrentInput}
+                currentIndex={currentIndex}
+                setCurrentIndex={setCurrentIndex}
+                charIndex={charIndex}
+                setCharIndex={setCharIndex}
+                currentChar={currentChar}
+                setCurrentChar={setCurrentChar}
+              />
+            }
+          />
+          <Route path="/Data" element={<Data dataArr={dataArr} />} />
+          <Route path="/Settings" element={<Settings />} />
+        </Routes>
+      </div>
+    </Router>
+  );
 }
 
-export default NavBar
+export default NavBar;
