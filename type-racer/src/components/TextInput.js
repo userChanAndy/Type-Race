@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 function TextInput({
   words,
@@ -51,9 +51,6 @@ function TextInput({
       </div>
     );
   }
-
-  // if checkmatch = true word[i].replace word[i] to green
-  // else word[i].replace word[i] to red
 
   return wordsDisplayed();
 }

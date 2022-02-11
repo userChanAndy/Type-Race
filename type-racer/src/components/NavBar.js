@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Data from "./Data";
 import HomePage from "./HomePage";
-import Settings from "./Settings";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import TextDisplayed from "./TextDisplayed";
 
@@ -13,7 +12,6 @@ function NavBar() {
   const [currentInput, setCurrentInput] = useState("");
   const [charIndex, setCharIndex] = useState(-1);
   const [currentChar, setCurrentChar] = useState("");
-
   const scoreData = "http://localhost:3000/scores";
   const [dataArr, setDataArr] = useState([]);
 
@@ -34,7 +32,6 @@ function NavBar() {
     if (time === 15) return correct * 4;
     else if (time === 30) return correct * 2;
   }
-  console.log(calculateScore());
 
   function calculatePercentage() {
     return correct !== 0
@@ -42,21 +39,25 @@ function NavBar() {
       : 0;
   }
 
+  function handleClick() {
+    setCharIndex(-1);
+    setCurrentIndex(0);
+    setCorrect(0);
+    setIncorect(0);
+  }
+
   return (
     <Router>
       <div id="navBarContainer">
         <nav id="navBar">
-          <button className="navBtn">
+          <button onClick={handleClick} className="navBtn">
             <Link to="/">Home</Link>
           </button>
-          <button className="navBtn">
+          <button onClick={handleClick} className="navBtn">
             <Link to="/Race">Race</Link>
           </button>
-          <button className="navBtn">
+          <button onClick={handleClick} className="navBtn">
             <Link to="/Data">Data</Link>
-          </button>
-          <button className="navBtn">
-            <Link to="/Settings">Settings</Link>
           </button>
         </nav>
         <Routes>
@@ -87,7 +88,6 @@ function NavBar() {
             }
           />
           <Route path="/Data" element={<Data dataArr={dataArr} />} />
-          <Route path="/Settings" element={<Settings />} />
         </Routes>
       </div>
     </Router>

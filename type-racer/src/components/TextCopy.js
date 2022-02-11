@@ -14,17 +14,9 @@ function TextCopy({
     else return "Race";
   }
 
-  function hideButton() {
-    if (GameStatus === "gameLoading") {
-      return null;
-    } else {
-      return { display: "none" };
-    }
-  }
-
   return (
     <div id="input">
-      <button className="start-btn" style={hideButton()} onClick={startTimer}>
+      <button className="start-btn" onClick={startTimer}>
         {startButton()}
       </button>
       <input

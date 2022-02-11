@@ -28,9 +28,9 @@ function TextDisplayed({
 }) {
   const [words, setWords] = useState([]);
   const textInput = useRef(null);
-  const [gameStatus, setGameStatus] = useState("gameLoading");
+  const [gameStatus, setGameStatus] = useState("gameStatus");
 
-  const [timeRemaining, setTimeRemaining] = useState(15);
+  const [timeRemaining, setTimeRemaining] = useState(time);
 
   useEffect(() => {
     setWords(generateWords());
@@ -46,7 +46,7 @@ function TextDisplayed({
 
   function startTimer(e) {
     e.preventDefault();
-    if (gameStatus === "gameOver") {
+    if (gameStatus === "gameLoading") {
       setCorrect(0);
       setIncorect(0);
       setCharIndex(-1);
@@ -54,6 +54,7 @@ function TextDisplayed({
       setCurrentChar("");
       setTimeRemaining(time);
       setWords(generateWords());
+      setGameStatus("gameOver");
     }
     if (gameStatus !== "gameStarted") {
       setGameStatus("gameStarted");
@@ -82,7 +83,7 @@ function TextDisplayed({
       setCharIndex(charIndex - 1);
       setCurrentChar("");
       setCharIndex(charIndex - 1);
-    } else {
+    } else if (e.keyCode >= 65 && e.keyCode <= 90) {
       setCharIndex(charIndex + 1);
       setCurrentChar(e.key);
     }
@@ -102,8 +103,32 @@ function TextDisplayed({
 
   function display() {
     if (gameStatus === "gameOver") {
+      setGameStatus("gameLoading");
+      const userName = "user";
+      const timePlayed = time;
+      const wpmScore = calculateScore();
+      const accuracy = calculatePercentage() + "%";
+
+      fetch(scoreData, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName: userName,
+          gameTime: timePlayed,
+          wpmScore: wpmScore,
+          accuracy: accuracy,
+        }),
+      })
+        .then((r) => r.json())
+        .then((newData) => onAddData(newData));
+    }
+
+    if (gameStatus === "gameLoading") {
       return (
         <Score
+          onAddData={onAddData}
           time={time}
           calculatePercentage={calculatePercentage}
           calculateScore={calculateScore}
@@ -129,7 +154,6 @@ function TextDisplayed({
   return (
     <div>
       <Timer
-        gameStatus={gameStatus}
         time={time}
         setTime={setTime}
         timeRemaining={timeRemaining}
